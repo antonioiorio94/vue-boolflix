@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <BoolflixHeader />
+    <BoolflixHeader @searchedTitle="apiQuery" />
   </div>
 </template>
 
@@ -15,26 +15,30 @@ export default {
   },
   data() {
     return {
+      textSearched: "",
       apiUrl: "https://api.themoviedb.org/3/search/",
       apiKey: "728f321f4e1478d4908741def6f96176",
     };
   },
-  mounted() {
-    const query = "ritorno";
-    const params = {
-      query,
-      api_key: this.apiKey,
-      language: "it-IT",
-    };
+  methods: {
+    apiQuery: function (searchedText) {
+      this.textSearched = searchedText;
+      console.log("apiQuery è questo:", this.textSearched);
+      const params = {
+        query: this.textSearched,
+        api_key: this.apiKey,
+        language: "it-IT",
+      };
 
-    axios
-      .get(this.apiUrl + "tv", { params })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      axios
+        .get(this.apiUrl + "tv", { params })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>

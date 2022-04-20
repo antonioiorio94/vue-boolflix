@@ -5,8 +5,14 @@
         <h3>Boolflix</h3>
       </div>
       <div class="col-4 d-flex justify-content-evenly">
-        <input type="text" placeholder="Cerca tra film o serie TV..." />
-        <button class="btn">Cerca</button>
+        <input
+          v-model="searchedText"
+          type="text"
+          placeholder="Cerca tra film o serie TV..."
+        />
+        <button @click="$emit('searchedTitle', searchedText)" class="btn">
+          Cerca
+        </button>
       </div>
     </div>
   </div>
@@ -15,7 +21,11 @@
 <script>
 export default {
   name: "BoolflixHeader",
-  props: {},
+  data() {
+    return {
+      searchedText: "",
+    };
+  },
 };
 </script>
 

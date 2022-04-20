@@ -1,23 +1,27 @@
 <template>
   <div id="app">
     <BoolflixHeader @searchedTitle="apiQuery" />
+    <BoolflixMain :searchedMovies="selectedMovie" />
   </div>
 </template>
 
 <script>
 import BoolflixHeader from "./components/BoolflixHeader.vue";
+import BoolflixMain from "./components/BoolflixMain.vue";
 import axios from "axios";
 
 export default {
   name: "App",
   components: {
     BoolflixHeader,
+    BoolflixMain,
   },
   data() {
     return {
       textSearched: "",
       apiUrl: "https://api.themoviedb.org/3/search/",
       apiKey: "728f321f4e1478d4908741def6f96176",
+      selectedMovie: [],
     };
   },
   methods: {
@@ -31,9 +35,12 @@ export default {
       };
 
       axios
-        .get(this.apiUrl + "tv", { params })
+        .get(this.apiUrl + "movie", { params })
         .then((response) => {
           console.log(response);
+          this.selectedMovie = response.data.results;
+          console.log(this.selectedMovie);
+          return this.selectedMovie;
         })
         .catch((error) => {
           console.log(error);

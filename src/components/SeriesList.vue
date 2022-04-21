@@ -1,12 +1,12 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-2" v-for="(movie, index) in moviesList" :key="index">
+      <div class="col-2" v-for="(serie, index) in seriesList" :key="index">
         <div class="card">
-          <h5>{{ movie.title }}</h5>
-          <p>Titolo originale: {{ movie.original_title }}</p>
-          <p class="text-uppercase">Lingua: {{ movie.original_language }}</p>
-          <p>Voto: {{ movie.vote_average }}</p>
+          <h5>{{ serie.name }}</h5>
+          <p>Titolo originale: {{ serie.original_name }}</p>
+          <p class="text-uppercase">Lingua: {{ serie.original_language }}</p>
+          <p>Voto: {{ serie.vote_average }}</p>
         </div>
       </div>
     </div>
@@ -15,9 +15,9 @@
 
 <script>
 export default {
-  name: "MoviesList",
+  name: "SeriesList",
   props: {
-    moviesList: Array,
+    seriesList: Array,
   },
 };
 </script>

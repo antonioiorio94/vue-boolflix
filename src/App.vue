@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <BoolflixHeader @searchedTitle="apiQuery" />
-    <BoolflixMain :searchedMovies="selectedMovie" />
+    <BoolflixHeader @searchedTitle="searchTitle" />
+    <BoolflixMain
+      :searchedMovies="selectedMovie"
+      :searchedSeries="selectedSeries"
+    />
   </div>
 </template>
 
@@ -22,12 +25,14 @@ export default {
       apiUrl: "https://api.themoviedb.org/3/search/",
       apiKey: "728f321f4e1478d4908741def6f96176",
       selectedMovie: [],
+      selectedSeries: [],
     };
   },
   methods: {
-    apiQuery: function (searchedText) {
+    //Richiesta Movie
+    apiQueryMovie: function (searchedText) {
       this.textSearched = searchedText;
-      console.log("apiQuery è questo:", this.textSearched);
+
       const params = {
         query: this.textSearched,
         api_key: this.apiKey,
@@ -45,6 +50,34 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    //Richiesta serie TV
+    apiQuerySeries: function (searchedText) {
+      this.textSearched = searchedText;
+
+      const params = {
+        query: this.textSearched,
+        api_key: this.apiKey,
+        language: "it-IT",
+      };
+
+      axios
+        .get(this.apiUrl + "tv", { params })
+        .then((response) => {
+          console.log(response);
+          this.selectedSeries = response.data.results;
+          console.log(this.selectedSeries);
+          return this.selectedSeries;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    searchTitle(searchText) {
+      if (searchText.length > 0) {
+        this.apiQueryMovie(searchText);
+        this.apiQuerySeries(searchText);
+      }
     },
   },
 };

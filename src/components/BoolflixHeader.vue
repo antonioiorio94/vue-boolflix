@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid">
-    <div class="row justify-content-between">
-      <div class="col-4">
+    <div class="row">
+      <div class="col-sm-6 col-4">
         <h3>Boolflix</h3>
       </div>
-      <div class="col-4 d-flex justify-content-evenly">
+      <div class="col-sm-6 col-4 d-flex justify-content-end">
         <input
           v-model="searchedText"
           type="text"

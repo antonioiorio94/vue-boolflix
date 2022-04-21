@@ -1,7 +1,7 @@
 <template>
   <main>
-    <MoviesList :moviesList="searchedMovies" />
-    <SeriesList :seriesList="searchedSeries" />
+    <MoviesList :moviesList="searchedMovies" :imgUrl="imgUrl" />
+    <SeriesList :seriesList="searchedSeries" :imgUrl="imgUrl" />
   </main>
 </template>
 
@@ -18,6 +18,11 @@ export default {
   components: {
     MoviesList,
     SeriesList,
+  },
+  data() {
+    return {
+      imgUrl: "https://image.tmdb.org/t/p/w342",
+    };
   },
 };
 </script>

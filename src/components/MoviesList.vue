@@ -25,6 +25,7 @@
               <span class="fw-bold">Lingua: </span>{{ movie.original_language }}
             </p>
             <p><span class="fw-bold">Voto: </span>{{ movie.vote_average }}</p>
+            <p><span class="fw-bold">Riassunto: </span>{{ movie.overview }}</p>
           </div>
         </div>
       </div>

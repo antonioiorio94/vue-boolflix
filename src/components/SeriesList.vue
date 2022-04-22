@@ -8,16 +8,25 @@
         :key="index"
       >
         <div class="card">
-          <img
-            class="mb-3"
-            :src="imgUrl + serie.poster_path"
-            :alt="serie.name"
-          />
+          <div v-if="serie.poster_path === null">
+            <div class="error_img">
+              <h2>Copertina non disponibile</h2>
+            </div>
+          </div>
+
+          <div v-else>
+            <img
+              class="mb-3"
+              :src="imgUrl + serie.poster_path"
+              :alt="serie.name"
+            />
+          </div>
           <div class="card-body">
             <h5>{{ serie.name }}</h5>
             <p>Titolo originale: {{ serie.original_name }}</p>
             <p class="text-uppercase">Lingua: {{ serie.original_language }}</p>
             <p>Voto: {{ serie.vote_average }}</p>
+            <p><span class="fw-bold">Riassunto: </span>{{ serie.overview }}</p>
           </div>
         </div>
       </div>
@@ -37,4 +46,15 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/style/card-style";
+@import "@/style/general";
+
+.error_img {
+  background-color: $base-color;
+  height: 475%;
+  width: 107%;
+  h2 {
+    text-align: center;
+    line-height: 40px;
+  }
+}
 </style>

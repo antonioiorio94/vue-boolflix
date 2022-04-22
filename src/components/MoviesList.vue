@@ -8,11 +8,20 @@
         :key="index"
       >
         <div class="card">
-          <img
-            class="mb-3"
-            :src="imgUrl + movie.poster_path"
-            :alt="movie.title"
-          />
+          <div v-if="movie.poster_path === null">
+            <div class="error_img">
+              <h2>Copertina non disponibile</h2>
+            </div>
+          </div>
+
+          <div v-else>
+            <img
+              class="mb-3"
+              :src="imgUrl + movie.poster_path"
+              :alt="movie.title"
+            />
+          </div>
+
           <div class="card-body">
             <h5>
               <span class="fw-bold">{{ movie.title }}</span>
@@ -45,4 +54,15 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/style/card-style";
+@import "@/style/general";
+
+.error_img {
+  background-color: $base-color;
+  height: 475%;
+  width: 107%;
+  h2 {
+    text-align: center;
+    line-height: 40px;
+  }
+}
 </style>
